@@ -1,4 +1,4 @@
 interface:
   display_name: "Git Smart Commit ZQH"
   short_description: "Agent review and staged commit and branch choices"
-  default_prompt: "Use $git-smart-commit-zqh to review my changes and choose editable commit and branch details before I decide whether to commit."
+  default_prompt: "Use $git-smart-commit-zqh to review my changes and choose editable commit and branch details before I decide whether to commit. Never create a branch whose name starts with codex, regardless of the desktop application's default prefix."

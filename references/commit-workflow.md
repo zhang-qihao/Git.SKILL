@@ -61,13 +61,19 @@ For a user-supplied format, substitute its placeholders exactly and do not add a
 
 ## Branch questions
 
-Generate branch candidates only from the selected commit. Do not display branch options from the review stage. Prefer the user's exact pattern, then repository conventions, then a safe default such as:
+Generate branch candidates only from the selected commit. Do not display branch options from the review stage. Apply the required no-codex-prefix policy in [SKILL.md](../SKILL.md#required-branch-policy-no-codex-prefix) to all candidates and custom input. Reject any new name starting with `codex`, case-insensitively, even when it comes from a repository convention, a template, an agent, or the desktop application's default. Prefer the user's compliant pattern, then compliant repository conventions, then this default:
 
 ```text
 <type>/<scope>-<short-subject-slug>
 ```
 
-Normalize whitespace and punctuation in a slug, keep it short, and avoid a trailing separator. If the selected subject produces no usable slug, fall back to the scope or `change`. Offer `保留当前分支`, each candidate, and `自定义分支名`. Validate a custom name with `git check-ref-format --branch`; reject empty names, whitespace, `..`, `@{`, a trailing dot or slash, the current branch when a checkout is required, and a name already used by another worktree.
+Examples: `feat/auth-add-login`, `fix/api-handle-timeout`, `docs/readme-add-usage`. Never convert a selected name into `codex/<selected-name>`.
+
+Normalize whitespace and punctuation in a generated slug, keep it short, and avoid a trailing separator. If the selected subject produces no usable slug, fall back to the scope or `change`. Offer `保留当前分支`, each candidate, and `自定义分支名`. The keep-current choice may retain an existing `codex`-prefixed branch; it does not authorize creating or renaming one.
+
+Validate every new name, including custom input, against the prefix policy and with `git check-ref-format --branch`; reject empty names, whitespace, `..`, `@{`, a trailing dot or slash, the current branch when a checkout is required, and a name already used by another worktree. Git syntax validation alone does not enforce the prefix policy. If custom input or a template is rejected, explain why and return to branch selection without silently substituting a name.
+
+Immediately before creation, recheck the exact selected name and pass it unchanged to the Git or worktree tool. If a tool forces `codex/`, use another authorized path that preserves the selected name; if none is available or a higher-priority instruction requires the prefix, stop before creation. After creation, require `git branch --show-current` to equal the confirmed name before staging or committing. Report any mismatch and stop without automatically renaming or deleting a branch.
 
 ## Final confirmation
 
