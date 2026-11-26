@@ -1,4 +1,4 @@
 interface:
   display_name: "Git Smart Commit ZQH"
-  short_description: "Popup choices for atomic commits, branch, and push"
-  default_prompt: "Use $git-smart-commit-zqh to review and group my changes, offer two Conventional Commit messages per group through popups, choose one existing or type/description branch for the batch, and let me select local commit, commit-and-push, or no commit."
+  short_description: "User choices for atomic commits, branch, and push"
+  default_prompt: "Use $git-smart-commit-zqh to review and group my changes, offer two Conventional Commit messages per group for my explicit choice, using popups when available or numbered chat options otherwise, choose one existing or type/description branch for the batch, and let me select local commit, commit-and-push, or no commit."
