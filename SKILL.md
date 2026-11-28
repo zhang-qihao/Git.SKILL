@@ -5,7 +5,7 @@ description: Review Git changes, split them into logical Conventional Commits, a
 
 # Git Smart Commit ZQH
 
-Review and prepare the whole batch before changing Git state. Every commit message, batch branch, and final operation requires an explicit user choice; never select automatically. Prefer user-input popups when available; otherwise present the same numbered options in chat and wait for the reply. Allow custom input in either mode. Silence, a timeout, or a preselected default is not a choice. When using an asynchronous popup, keep the turn active and wait for the response; do not end the turn while it is pending. A pending or dismissed popup is not approval. Preserve collected answers and resume the unanswered step when the user responds or asks to continue.
+Review and prepare the whole batch before changing Git state. Every commit message, batch branch, and final operation requires an explicit user choice; never select automatically. When an interactive selection tool is available and callable in the current mode (for example, `request_user_input_async`), you MUST invoke it for every choice; text-only options are not a substitute. Only when no such tool is available may you present the same numbered options in chat. In either mode, wait for the user's explicit selection before proceeding to dependent steps. Allow custom input in either mode. Silence, a timeout, or a preselected default is not a choice. When using an asynchronous popup, keep the turn active and wait for the response; do not end the turn while it is pending. A pending or dismissed popup is not approval. Preserve collected answers and resume the unanswered step when the user responds or asks to continue.
 
 ## Workflow
 
